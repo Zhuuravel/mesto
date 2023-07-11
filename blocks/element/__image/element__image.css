@@ -1,0 +1,5 @@
+.element__image {
+    background-image: url("../../../images/karachaevsk.png");
+    background-size: cover;
+    min-height: 282px;
+}
