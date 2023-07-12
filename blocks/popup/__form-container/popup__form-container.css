@@ -1,0 +1,7 @@
+.popup__form-container {
+    min-width: 358px;
+    margin: 0;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+}
