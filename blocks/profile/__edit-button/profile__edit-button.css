@@ -9,6 +9,7 @@
     align-self: flex-end;
     cursor: pointer;
     transition: opacity 0.3s ease;
+    margin-bottom: 7px;
 }
 
 .profile__edit-button:hover {

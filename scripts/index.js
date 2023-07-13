@@ -1,7 +1,6 @@
 const profileEditButton = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.popup_type_profile');
 const profilePopupCloseButton = popupProfile.querySelector('.popup__close-button');
-const elementLikeButton = document.querySelector('section.elements div.element .element__like-button');
 let formElement = document.querySelector('.popup__form-container');
 let nameInput = formElement.querySelector('.popup__input_name');
 let descriptionInput = formElement.querySelector('.popup__input_description');
@@ -25,7 +24,6 @@ function toggleLike() {
 
 profileEditButton.addEventListener('click', addPopup) ;
 profilePopupCloseButton.addEventListener('click', removePopup);
-elementLikeButton.addEventListener('click', toggleLike);
 
     function handleFormSubmit (evt) {
         evt.preventDefault();
