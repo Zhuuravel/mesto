@@ -50,6 +50,7 @@ function removeContentPopup() {
 contentAddButton.addEventListener('click', addContentPopup) ;
 contentPopupCloseButton.addEventListener('click', removeContentPopup);
 
+const imageViewButton = document.querySelector('.element__image-button');
 const popupImage = document.querySelector('.popup_type_image');
 const imagePopupCloseButton = popupImage.querySelector('.popup__close-button');
 let imageViewCard = popupImage.querySelector('.popup__image');
@@ -58,15 +59,12 @@ let descriptionViewCard = popupImage.querySelector('.popup__description');
 const container = document.querySelector('.elements__list');
 const template = document.querySelector('#element__template').content;
 
-initialCards.forEach(function (item) {
+const renderCard = (function(item) {
     const li = template.querySelector('.element').cloneNode(true);
     li.querySelector('.element__image').src = item.link;
     li.querySelector('.element__title').textContent = item.name;
     li.querySelector('.element__delete-button').addEventListener('click', () => {
         li.remove();
-    });
-    li.querySelector('.element__like-button').addEventListener('click', function (event) {
-        event.target.classList.toggle('element__like-button_active');
     });
     li.querySelector('.element__image-button').addEventListener('click', function() {
         popupImage.classList.add('popup_opened');
@@ -74,7 +72,7 @@ initialCards.forEach(function (item) {
         descriptionViewCard.textContent = item.name;
     });
     container.append(li);
-});
+})
 
 function removeImagePopup() {
     popupImage.classList.remove('popup_opened');
@@ -87,19 +85,7 @@ function handleContentFormSubmit (evt) {
     const li = template.querySelector('.element').cloneNode(true);
     li.querySelector('.element__image').src = photoLinkInput.value;
     li.querySelector('.element__title').textContent = titleInput.value;
-    li.querySelector('.element__delete-button').addEventListener('click', () => {
-        li.remove();
-    });
-    li.querySelector('.element__like-button').addEventListener('click', function (event) {
-        event.target.classList.toggle('element__like-button_active');
-    });
-    li.querySelector('.element__image-button').addEventListener('click', function() {
-        popupImage.classList.add('popup_opened');
-        imageViewCard.src = photoLinkInput.value;
-        descriptionViewCard.textContent = titleInput.value;
-    });
     container.prepend(li);
     removeContentPopup();
 }
 formElementContent.addEventListener('submit', handleContentFormSubmit);
-
