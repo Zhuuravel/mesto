@@ -49,8 +49,6 @@ function removeContentPopup() {
 
 contentAddButton.addEventListener('click', addContentPopup) ;
 contentPopupCloseButton.addEventListener('click', removeContentPopup);
-
-const imageViewButton = document.querySelector('.element__image-button');
 const popupImage = document.querySelector('.popup_type_image');
 const imagePopupCloseButton = popupImage.querySelector('.popup__close-button');
 let imageViewCard = popupImage.querySelector('.popup__image');
