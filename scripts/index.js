@@ -56,6 +56,7 @@ const template = document.querySelector('#element__template').content;
 function createCard(cardName, cardLink) {
     const card = template.querySelector('.element').cloneNode(true);
     card.querySelector('.element__image').src = cardLink;
+    card.querySelector('.element__image').alt = cardName;
     card.querySelector('.element__title').textContent = cardName;
     card.querySelector('.element__delete-button').addEventListener('click', () => {
         card.remove();
