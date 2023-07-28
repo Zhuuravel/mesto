@@ -31,6 +31,7 @@ function handleProfileFormSubmit (evt) {
 }
 formElementProfile.addEventListener('submit', handleProfileFormSubmit);
 
+
 const contentAddButton = document.querySelector('.profile__add-button');
 const popupContent = document.querySelector('.popup_type_content');
 const contentPopupCloseButton = popupContent.querySelector('.popup__close-button');
@@ -43,6 +44,8 @@ contentAddButton.addEventListener('click', function() {
     photoLinkInput.value = '';
     titleInput.value = '';
 });
+document.addEventListener('keydown', closePopupEscProfile)//тут мб убрать надо
+document.addEventListener('keydown', closePopupEscContent)//тут мб убрать надо
 contentPopupCloseButton.addEventListener('click', () => closePopup(popupContent));
 
 const popupImage = document.querySelector('.popup_type_image');
@@ -94,3 +97,15 @@ function handleContentFormSubmit (evt) {
     closePopup(popupContent);
 }
 formElementContent.addEventListener('submit', handleContentFormSubmit);
+
+function closePopupEscProfile(evt) {//тут мб убрать надо
+    if (evt.key === 'Escape') {//тут мб убрать надо
+        closePopup(popupProfile)//тут мб убрать надо
+    }
+}
+
+function closePopupEscContent(evt) {//тут мб убрать надо
+    if (evt.key === 'Escape') {//тут мб убрать надо
+        closePopup(popupContent)//тут мб убрать надо
+    }
+}
