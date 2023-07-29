@@ -1,7 +1,7 @@
 const profileEditButton = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.popup_type_profile');
 const profilePopupCloseButton = popupProfile.querySelector('.popup__close-button');
-const formElementProfile = document.querySelector('.popup__form-container');
+const formElementProfile = document.querySelector('.popup__form');
 const nameInput = formElementProfile.querySelector('.popup__input_name');
 const descriptionInput = formElementProfile.querySelector('.popup__input_description');
 const profileInfo = document.querySelector('.profile__info');
@@ -35,7 +35,7 @@ formElementProfile.addEventListener('submit', handleProfileFormSubmit);
 const contentAddButton = document.querySelector('.profile__add-button');
 const popupContent = document.querySelector('.popup_type_content');
 const contentPopupCloseButton = popupContent.querySelector('.popup__close-button');
-const formElementContent = popupContent.querySelector('.popup__form-container');
+const formElementContent = popupContent.querySelector('.popup__form');
 const titleInput = formElementContent.querySelector('.popup__input_title');
 const photoLinkInput = formElementContent.querySelector('.popup__input_photo-link');
 
@@ -44,8 +44,8 @@ contentAddButton.addEventListener('click', function() {
     photoLinkInput.value = '';
     titleInput.value = '';
 });
-document.addEventListener('keydown', closePopupEscProfile)//тут мб убрать надо
-document.addEventListener('keydown', closePopupEscContent)//тут мб убрать надо
+document.addEventListener('keydown', closePopupEscProfile)
+document.addEventListener('keydown', closePopupEscContent)
 contentPopupCloseButton.addEventListener('click', () => closePopup(popupContent));
 
 const popupImage = document.querySelector('.popup_type_image');
@@ -98,14 +98,25 @@ function handleContentFormSubmit (evt) {
 }
 formElementContent.addEventListener('submit', handleContentFormSubmit);
 
-function closePopupEscProfile(evt) {//тут мб убрать надо
-    if (evt.key === 'Escape') {//тут мб убрать надо
-        closePopup(popupProfile)//тут мб убрать надо
+function closePopupEscProfile(evt) {
+    if (evt.key === 'Escape') {
+        closePopup(popupProfile)
     }
 }
 
-function closePopupEscContent(evt) {//тут мб убрать надо
-    if (evt.key === 'Escape') {//тут мб убрать надо
-        closePopup(popupContent)//тут мб убрать надо
+function closePopupEscContent(evt) {
+    if (evt.key === 'Escape') {
+        closePopup(popupContent)
     }
 }
+
+const validationConfig = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__submit-button',
+    inactiveButtonClass: 'popup__submit-button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+};
+
+enableValidation(validationConfig)
