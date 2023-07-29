@@ -36,15 +36,15 @@
       <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form" name="info" novalidate>
-        <label for="name" class="popup__form-field">
-          <input type="text" class="popup__input popup__input_name" id="name" name="name" placeholder="Имя" value="Жак-Ив Кусто" minlength="2" maxlength="40" required>
-          <span class="popup__input-error popup__input-error_active"></span>
+        <label for="input-name" class="popup__form-field">
+          <input type="text" class="popup__input popup__input_name" id="input-name" name="name" placeholder="Имя" value="Жак-Ив Кусто" minlength="2" maxlength="40" required>
+          <span class="popup__input-error input-name-error popup__input-error_active"></span>
         </label>
-        <label for="description" class="popup__form-field">
-          <input type="text" class="popup__input popup__input_description" id="description" name="description" placeholder="О себе" value="Исследователь океана" minlength="2" maxlength="200" required>
-          <span class="popup__input-error popup__input-error_active"></span>
+        <label for="input-description" class="popup__form-field">
+          <input type="text" class="popup__input popup__input_description" id="input-description" name="description" placeholder="О себе" value="Исследователь океана" minlength="2" maxlength="200" required>
+          <span class="popup__input-error input-description-error popup__input-error_active"></span>
         </label>
-        <button class="popup__submit-button popup__submit-button_disabled" type="submit" aria-label="Сохранить">Сохранить</button>
+        <button class="popup__submit-button" type="submit" aria-label="Сохранить">Сохранить</button>
       </form>
     </div>
   </div>
@@ -53,14 +53,14 @@
       <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
       <h2 class="popup__title">Новое место</h2>
       <form class="popup__form" name="photo" novalidate>
-        <label for="title" class="popup__form-field">
-          <input type="text" class="popup__input popup__input_title" id="title" name="title" placeholder="Название" minlength="2" maxlength="30" required>
-          <span class="popup__input-error popup__input-error_active"></span></label>
-        <label for="photo-link" class="popup__form-field">
-          <input type="url" class="popup__input popup__input_photo-link" id="photo-link" name="photo-link" placeholder="Ссылка на картинку" required>
-          <span class="popup__input-error popup__input-error_active"></span>
+        <label for="input-title" class="popup__form-field">
+          <input type="text" class="popup__input popup__input_title" id="input-title" name="title" placeholder="Название" minlength="2" maxlength="30" required>
+          <span class="popup__input-error input-title-error popup__input-error_active"></span></label>
+        <label for="input-photo-link" class="popup__form-field">
+          <input type="url" class="popup__input popup__input_photo-link" id="input-photo-link" name="photo-link" placeholder="Ссылка на картинку" required>
+          <span class="popup__input-error input-photo-link-error popup__input-error_active"></span>
         </label>
-        <button class="popup__submit-button popup__submit-button_disabled" type="submit" aria-label="Создать">Создать</button>
+        <button class="popup__submit-button" type="submit" aria-label="Создать">Создать</button>
       </form>
     </div>
   </div>
