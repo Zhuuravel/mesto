@@ -10,6 +10,16 @@ const profileDescription = document.querySelector('.profile__description');
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', function closePopupEsc(evt) {
+        if (evt.key === 'Escape') {
+            popup.classList.remove('popup_opened')
+        }
+    })
+    document.addEventListener('click', function closePopupOverlay(evt) {
+        if (evt.target.classList.contains('popup_opened') && !evt.target.classList.contains('popup__container')) {
+            popup.classList.remove('popup_opened')
+        }
+    })
 }
 
 function closePopup(popup) {
@@ -44,8 +54,6 @@ contentAddButton.addEventListener('click', function() {
     photoLinkInput.value = '';
     titleInput.value = '';
 });
-document.addEventListener('keydown', closePopupEscProfile)
-document.addEventListener('keydown', closePopupEscContent)
 contentPopupCloseButton.addEventListener('click', () => closePopup(popupContent));
 
 const popupImage = document.querySelector('.popup_type_image');
@@ -97,18 +105,6 @@ function handleContentFormSubmit (evt) {
     closePopup(popupContent);
 }
 formElementContent.addEventListener('submit', handleContentFormSubmit);
-
-function closePopupEscProfile(evt) {
-    if (evt.key === 'Escape') {
-        closePopup(popupProfile)
-    }
-}
-
-function closePopupEscContent(evt) {
-    if (evt.key === 'Escape') {
-        closePopup(popupContent)
-    }
-}
 
 const validationConfig = {
     formSelector: '.popup__form',
