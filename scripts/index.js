@@ -81,15 +81,15 @@ function createCard(cardName, cardLink) {
     card.querySelector('.element__like-button').addEventListener('click', function (event) {
         event.target.classList.toggle('element__like-button_active');
     });
-    card.querySelector('.element__image-button').addEventListener('click', function(popup) {
+    card.querySelector('.element__image-button').addEventListener('click', function() {
         popupImage.classList.add('popup_opened');
         imageViewCard.src = cardLink;
         imageViewCard.alt = cardName;
         descriptionViewCard.textContent = cardName;
         document.addEventListener('keydown', closeByEsc)
-        popup.addEventListener('click', function closePopupOverlay(evt) {
+        popupImage.addEventListener('click', function closePopupOverlay(evt) {
             if (evt.target.classList.contains('popup_opened')) {
-                closePopup(popup)
+                closePopup(popupImage)
             }
         })
     });
