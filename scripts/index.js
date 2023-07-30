@@ -10,20 +10,24 @@ const profileDescription = document.querySelector('.profile__description');
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
-    document.addEventListener('keydown', function closePopupEsc(evt) {
-        if (evt.key === 'Escape') {
-            popup.classList.remove('popup_opened')
-        }
-    })
-    document.addEventListener('click', function closePopupOverlay(evt) {
-        if (evt.target.classList.contains('popup_opened') && !evt.target.classList.contains('popup__container')) {
-            popup.classList.remove('popup_opened')
+    document.addEventListener('keydown', closeByEsc)
+    popup.addEventListener('click', function closePopupOverlay(evt) {
+        if (evt.target.classList.contains('popup_opened')) {
+            closePopup(popup)
         }
     })
 }
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closeByEsc)
+}
+
+function closeByEsc(evt) {
+    if (evt.key === "Escape") {
+        const openedPopup = document.querySelector('.popup_opened')
+        closePopup(openedPopup)
+    }
 }
 
 profileEditButton.addEventListener('click', function() {
@@ -53,6 +57,8 @@ contentAddButton.addEventListener('click', function() {
     openPopup(popupContent);
     photoLinkInput.value = '';
     titleInput.value = '';
+    const buttonDisabled = popupContent.querySelector('.popup__submit-button')
+    buttonDisabled.classList.add('popup__submit-button_disabled')
 });
 contentPopupCloseButton.addEventListener('click', () => closePopup(popupContent));
 
@@ -75,11 +81,17 @@ function createCard(cardName, cardLink) {
     card.querySelector('.element__like-button').addEventListener('click', function (event) {
         event.target.classList.toggle('element__like-button_active');
     });
-    card.querySelector('.element__image-button').addEventListener('click', function() {
+    card.querySelector('.element__image-button').addEventListener('click', function(popup) {
         popupImage.classList.add('popup_opened');
         imageViewCard.src = cardLink;
         imageViewCard.alt = cardName;
         descriptionViewCard.textContent = cardName;
+        document.addEventListener('keydown', closeByEsc)
+        popup.addEventListener('click', function closePopupOverlay(evt) {
+            if (evt.target.classList.contains('popup_opened')) {
+                closePopup(popup)
+            }
+        })
     });
     return card;
 }
