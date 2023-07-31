@@ -8,14 +8,16 @@ const profileInfo = document.querySelector('.profile__info');
 const profileName = profileInfo.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 
+function closePopupOverlay(evt) {
+        if (evt.target.classList.contains('popup_opened')) {
+             closePopup(evt.target)
+         }
+     }
+
 function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closeByEsc)
-    popup.addEventListener('click', function closePopupOverlay(evt) {
-        if (evt.target.classList.contains('popup_opened')) {
-            closePopup(popup)
-        }
-    })
+    window.addEventListener('click', closePopupOverlay)
 }
 
 function closePopup(popup) {
@@ -59,6 +61,7 @@ contentAddButton.addEventListener('click', function() {
     titleInput.value = '';
     const buttonDisabled = popupContent.querySelector('.popup__submit-button')
     buttonDisabled.classList.add('popup__submit-button_disabled')
+    buttonDisabled.setAttribute('disabled', true);
 });
 contentPopupCloseButton.addEventListener('click', () => closePopup(popupContent));
 
@@ -86,12 +89,8 @@ function createCard(cardName, cardLink) {
         imageViewCard.src = cardLink;
         imageViewCard.alt = cardName;
         descriptionViewCard.textContent = cardName;
-        document.addEventListener('keydown', closeByEsc)
-        popupImage.addEventListener('click', function closePopupOverlay(evt) {
-            if (evt.target.classList.contains('popup_opened')) {
-                closePopup(popupImage)
-            }
-        })
+        document.addEventListener('keydown', closeByEsc);
+        window.addEventListener('click', closePopupOverlay)
     });
     return card;
 }
