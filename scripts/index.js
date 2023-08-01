@@ -8,16 +8,30 @@ const profileInfo = document.querySelector('.profile__info');
 const profileName = profileInfo.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 
+// const popup = document.querySelector('.popup');
+// popup.addEventListener('click', closePopupOverlay)
+// const popups = Array.from(document.querySelectorAll('.popup'))
+// console.log(popups)
+// popups.forEach = (popup) => {
+//     popup.addEventListener('click', closePopupOverlay)
+// }
+
+// function closePopupOverlay(evt) {
+//         if (evt.target.classList.contains('popup_opened')) {
+//              closePopup(evt.currentTarget)
+//          }
+//      }
+
 function closePopupOverlay(evt) {
-        if (evt.target.classList.contains('popup_opened')) {
-             closePopup(evt.target)
+        if (evt.currentTarget === evt.target) {
+             closePopup(evt.currentTarget)
          }
-     }
+}
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closeByEsc)
-    window.addEventListener('click', closePopupOverlay)
+    // popup.addEventListener('click', closePopupOverlay)
 }
 
 function closePopup(popup) {
@@ -85,12 +99,10 @@ function createCard(cardName, cardLink) {
         event.target.classList.toggle('element__like-button_active');
     });
     card.querySelector('.element__image-button').addEventListener('click', function() {
-        popupImage.classList.add('popup_opened');
+        openPopup(popupImage);
         imageViewCard.src = cardLink;
         imageViewCard.alt = cardName;
         descriptionViewCard.textContent = cardName;
-        document.addEventListener('keydown', closeByEsc);
-        window.addEventListener('click', closePopupOverlay)
     });
     return card;
 }
@@ -116,6 +128,10 @@ function handleContentFormSubmit (evt) {
     closePopup(popupContent);
 }
 formElementContent.addEventListener('submit', handleContentFormSubmit);
+
+popupProfile.addEventListener('click', closePopupOverlay)
+popupContent.addEventListener('click', closePopupOverlay)
+popupImage.addEventListener('click', closePopupOverlay)
 
 const validationConfig = {
     formSelector: '.popup__form',
