@@ -8,19 +8,9 @@ const profileInfo = document.querySelector('.profile__info');
 const profileName = profileInfo.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 
-// const popup = document.querySelector('.popup');
-// popup.addEventListener('click', closePopupOverlay)
-// const popups = Array.from(document.querySelectorAll('.popup'))
-// console.log(popups)
-// popups.forEach = (popup) => {
-//     popup.addEventListener('click', closePopupOverlay)
-// }
-
-// function closePopupOverlay(evt) {
-//         if (evt.target.classList.contains('popup_opened')) {
-//              closePopup(evt.currentTarget)
-//          }
-//      }
+document.querySelectorAll('.popup').forEach( popup => {
+    popup.addEventListener('click', closePopupOverlay);
+})
 
 function closePopupOverlay(evt) {
         if (evt.currentTarget === evt.target) {
@@ -128,10 +118,6 @@ function handleContentFormSubmit (evt) {
     closePopup(popupContent);
 }
 formElementContent.addEventListener('submit', handleContentFormSubmit);
-
-popupProfile.addEventListener('click', closePopupOverlay)
-popupContent.addEventListener('click', closePopupOverlay)
-popupImage.addEventListener('click', closePopupOverlay)
 
 const validationConfig = {
     formSelector: '.popup__form',
