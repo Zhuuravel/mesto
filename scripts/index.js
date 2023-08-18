@@ -1,3 +1,6 @@
+import Card from "./Card.js";
+import initialCards from "./elements.js";
+
 const profileEditButton = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.popup_type_profile');
 const profilePopupCloseButton = popupProfile.querySelector('.popup__close-button');
@@ -65,7 +68,6 @@ contentAddButton.addEventListener('click', function() {
     titleInput.value = '';
     const buttonDisabled = popupContent.querySelector('.popup__submit-button')
     buttonDisabled.classList.add('popup__submit-button_disabled')
-    buttonDisabled.setAttribute('disabled', true);
 });
 contentPopupCloseButton.addEventListener('click', () => closePopup(popupContent));
 
@@ -75,13 +77,13 @@ const imageViewCard = popupImage.querySelector('.popup__image');
 const descriptionViewCard = popupImage.querySelector('.popup__description');
 
 const container = document.querySelector('.elements__list');
-const template = document.querySelector('#element__template').content;
+const template = document.querySelector('#element__template').content.querySelector('.element');
 
-function createCard(cardName, cardLink) {
-    const card = template.querySelector('.element').cloneNode(true);
-    card.querySelector('.element__image').src = cardLink;
-    card.querySelector('.element__image').alt = cardName;
-    card.querySelector('.element__title').textContent = cardName;
+const createCard = (cardData) => {
+    const card = template.cloneNode(true);
+    card.querySelector('.element__image').src = cardData.link;
+    card.querySelector('.element__image').alt = cardData.name;
+    card.querySelector('.element__title').textContent = cardData.name;
     card.querySelector('.element__delete-button').addEventListener('click', () => {
         card.remove();
     });
@@ -90,19 +92,21 @@ function createCard(cardName, cardLink) {
     });
     card.querySelector('.element__image-button').addEventListener('click', function() {
         openPopup(popupImage);
-        imageViewCard.src = cardLink;
-        imageViewCard.alt = cardName;
-        descriptionViewCard.textContent = cardName;
+        imageViewCard.src = cardData.link;
+        imageViewCard.alt = cardData.name;
+        descriptionViewCard.textContent = cardData.name;
     });
     return card;
 }
 
-function renderNewCard(card, container) {
-    container.prepend(card);
+const renderNewCard = (cardData) => {
+    const card = new Card(cardData);
+    container.prepend(card.getView());
 }
 
-function renderCard(card, container) {
-    container.append(card);
+const renderCard = (cardData) => {
+    const card = new Card(cardData);
+    container.append(card.getView());
 }
 
 initialCards.forEach(function (item) {
