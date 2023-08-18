@@ -1,13 +1,14 @@
 class Card {
-    constructor(data, templateSelector) {
-        this._name = data.name;
-        this._link = data.link;
+    constructor(cardName, cardLink, templateSelector) {
+        this._name = cardName;
+        this._link = cardLink;
     }
 
     _getTemplate() {
-        const card = document.querySelector('#element__template').content.querySelector('.element').cloneNode(true);
-
-        return card;
+        const cardTemplate = document.querySelector('#element__template').content.querySelector('.element').cloneNode(true);
+        console.log(this._name)
+        console.log(this._link)
+        return cardTemplate;
     }
 
     _setData() {
@@ -28,10 +29,7 @@ class Card {
     }
 
     _handleImageCard() {
-        openPopup(this._newCard);
-        this._newCard.src = this._link;
-        this._newCard.alt = this._name;
-        this._newCard.textContent = this._name;
+
     }
 
     _setListeners() {
@@ -49,6 +47,8 @@ class Card {
         this._newCard = this._getTemplate();
         this._setData()
         this._setListeners()
+
+        return this._newCard
     }
 }
 

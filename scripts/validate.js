@@ -55,3 +55,5 @@ const setEventListeners = (form, config) => {
         })
     })
 }
+
+export default enableValidation
