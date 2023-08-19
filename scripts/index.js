@@ -1,6 +1,7 @@
 import initialCards from "./elements.js";
-import Card from "./Card.js";
 import enableValidation from "./validate.js";
+import Card from "./Card.js";
+
 
 const profileEditButton = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.popup_type_profile');
@@ -17,9 +18,9 @@ document.querySelectorAll('.popup').forEach( popup => {
 })
 
 function closePopupOverlay(evt) {
-    if (evt.currentTarget === evt.target) {
-        closePopup(evt.currentTarget)
-    }
+        if (evt.currentTarget === evt.target) {
+             closePopup(evt.currentTarget)
+         }
 }
 
 function openPopup(popup) {
@@ -50,7 +51,7 @@ profilePopupCloseButton.addEventListener('click', () => closePopup(popupProfile)
 function handleProfileFormSubmit (evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
-    profileDescription.textContent =descriptionInput.value;
+    profileDescription.textContent = descriptionInput.value;
     closePopup(popupProfile);
 }
 formElementProfile.addEventListener('submit', handleProfileFormSubmit);
@@ -69,6 +70,7 @@ contentAddButton.addEventListener('click', function() {
     titleInput.value = '';
     const buttonDisabled = popupContent.querySelector('.popup__submit-button')
     buttonDisabled.classList.add('popup__submit-button_disabled')
+    buttonDisabled.setAttribute('disabled', true);
 });
 contentPopupCloseButton.addEventListener('click', () => closePopup(popupContent));
 
@@ -78,10 +80,10 @@ const imageViewCard = popupImage.querySelector('.popup__image');
 const descriptionViewCard = popupImage.querySelector('.popup__description');
 
 const container = document.querySelector('.elements__list');
-const template = document.querySelector('#element__template').content;
+const template = document.querySelector('#element__template').content.querySelector('.element');
 
-const createCard = (cardName, cardLink) => {
-    const card = template.querySelector('.element').cloneNode(true);
+function createCard(cardName, cardLink) {
+    const card = template.cloneNode(true);
     card.querySelector('.element__image').src = cardLink;
     card.querySelector('.element__image').alt = cardName;
     card.querySelector('.element__title').textContent = cardName;
@@ -100,13 +102,14 @@ const createCard = (cardName, cardLink) => {
     return card;
 }
 
-const renderNewCard = (card, container) => {
-    const newCard = new Card(card);
+function renderNewCard(card, container) {
+    const newCard = new Card(card)
+    console.log(card)
     container.prepend(newCard.getView());
 }
 
-const renderCard = (card, container) => {
-    const newCard = new Card(card);
+function renderCard(card, container) {
+    const newCard = new Card(card)
     container.append(newCard.getView());
 }
 
@@ -133,3 +136,5 @@ const validationConfig = {
 };
 
 enableValidation(validationConfig)
+
+export default openPopup

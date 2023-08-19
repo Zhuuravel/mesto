@@ -1,55 +1,64 @@
+import openPopup from "./index.js";
+
 class Card {
-    constructor(cardName, cardLink, templateSelector) {
-        this._name = cardName;
-        this._link = cardLink;
+    constructor({name, link}, templateSelector) {
+        this._name = name;
+        this._link = link;
+        console.log(this)
+        this._templateSelector = templateSelector;
     }
 
     _getTemplate() {
-        const cardTemplate = document.querySelector('#element__template').content.querySelector('.element').cloneNode(true);
-        console.log(this._name)
-        console.log(this._link)
-        return cardTemplate;
+        return document
+            .querySelector('#element__template')
+            .content.querySelector('.element')
+            .cloneNode(true);
     }
 
     _setData() {
-        const imageCard = this._newCard.querySelector('.element__image');
+        const imageCard = this._newCardElement.querySelector('.element__image');
         imageCard.src = this._link;
         imageCard.alt = this._name;
-        const titleCard = this._newCard.querySelector('.element__title');
+        const titleCard = this._newCardElement.querySelector('.element__title');
         titleCard.textContent = this._name;
     }
 
     _handleDeleteCard() {
-        this._newCard.remove();
-        this._newCard = null;
+        this._newCardElement.remove();
+        // this._newCardElement = null;
     }
 
     _handleLikeCard() {
-        this._newCard.classList.toggle('element__like-button_active');
+        this._newCardElement.classList.toggle('element__like-button_active');
     }
 
     _handleImageCard() {
-
+        const popupImage = document.querySelector('.popup_type_image');
+        const imageViewCard = popupImage.querySelector('.popup__image');
+        const descriptionViewCard = popupImage.querySelector('.popup__description');
+        imageViewCard.src = this._link;
+        imageViewCard.alt = this._name;
+        descriptionViewCard.textContent = this._name;
+        openPopup(popupImage);
     }
 
     _setListeners() {
-        const deleteButton = this._newCard.querySelector('.element__delete-button');
-        deleteButton.addEventListener('click', this._handleDeleteCard)
+        const deleteButton = this._newCardElement.querySelector('.element__delete-button');
+        deleteButton.addEventListener('click', () => { this._handleDeleteCard() })
 
-        const likeButton = this._newCard.querySelector('.element__like-button');
-        likeButton.addEventListener('click', this._handleLikeCard);
+        const likeButton = this._newCardElement.querySelector('.element__like-button');
+        likeButton.addEventListener('click', () => { this._handleLikeCard() });
 
-        const imageButton = this._newCard.querySelector('.element__image-button');
-        imageButton.addEventListener('click', this._handleImageCard);
+        const imageButton = this._newCardElement.querySelector('.element__image-button');
+        imageButton.addEventListener('click', () => { this._handleImageCard() });
     }
 
     getView() {
-        this._newCard = this._getTemplate();
-        this._setData()
-        this._setListeners()
+        this._newCardElement = this._getTemplate();
+        this._setData();
+        this._setListeners();
 
-        return this._newCard
+        return this._newCardElement
     }
 }
-
 export default Card
