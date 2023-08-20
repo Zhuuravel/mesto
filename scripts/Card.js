@@ -4,13 +4,12 @@ class Card {
     constructor({name, link}, templateSelector) {
         this._name = name;
         this._link = link;
-        console.log(this)
         this._templateSelector = templateSelector;
     }
 
     _getTemplate() {
         return document
-            .querySelector('#element__template')
+            .querySelector(this._templateSelector)
             .content.querySelector('.element')
             .cloneNode(true);
     }
@@ -25,11 +24,11 @@ class Card {
 
     _handleDeleteCard() {
         this._newCardElement.remove();
-        // this._newCardElement = null;
+        this._newCardElement = null;
     }
 
     _handleLikeCard() {
-        this._newCardElement.classList.toggle('element__like-button_active');
+        this._newCardElement.querySelector('.element__like-button').classList.toggle('element__like-button_active');
     }
 
     _handleImageCard() {

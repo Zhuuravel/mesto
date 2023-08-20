@@ -8,6 +8,7 @@ function enableValidation(config) {
 
 const showInputError = (form, input, config) => {
     input.classList.add(config.inputErrorClass)
+    console.log(input)
     const span = form.querySelector(`.${input.id}-error`)
     span.textContent = input.validationMessage
     span.classList.add(config.errorClass)

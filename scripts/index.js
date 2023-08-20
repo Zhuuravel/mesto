@@ -1,7 +1,32 @@
-import initialCards from "./elements.js";
-import enableValidation from "./validate.js";
+import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
 
+const initialCards = [
+    {
+        name: 'Архыз',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+        name: 'Челябинская область',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+        name: 'Иваново',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+        name: 'Камчатка',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+        name: 'Холмогорский район',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+        name: 'Байкал',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+];
 
 const profileEditButton = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.popup_type_profile');
@@ -102,26 +127,21 @@ function createCard(cardName, cardLink) {
     return card;
 }
 
-function renderNewCard(card, container) {
-    const newCard = new Card(card)
-    console.log(card)
+function renderCard(cardData) {
+    const newCard = new Card(cardData, '#element__template')
+    // console.log(newCard)
     container.prepend(newCard.getView());
 }
 
-function renderCard(card, container) {
-    const newCard = new Card(card)
-    container.append(newCard.getView());
-}
-
-initialCards.forEach(function (item) {
-    renderCard(createCard(item.name, item.link), container);
+initialCards.forEach((cardData) => {
+    renderCard(cardData);
 })
 
 imagePopupCloseButton.addEventListener('click', () => closePopup(popupImage));
 
 function handleContentFormSubmit (evt) {
     evt.preventDefault();
-    renderNewCard(createCard(titleInput.value, photoLinkInput.value), container);
+    renderCard({name: titleInput.value, link: photoLinkInput.value}, '#element__template');
     closePopup(popupContent);
 }
 formElementContent.addEventListener('submit', handleContentFormSubmit);
@@ -135,6 +155,8 @@ const validationConfig = {
     errorClass: 'popup__input-error_active'
 };
 
-enableValidation(validationConfig)
+// enableValidation(validationConfig)
+const validationPopup = new FormValidator(validationConfig)
+validationPopup.enableValidation()
 
 export default openPopup
