@@ -31,7 +31,7 @@ const initialCards = [
 const profileEditButton = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.popup_type_profile');
 const profilePopupCloseButton = popupProfile.querySelector('.popup__close-button');
-const formElementProfile = document.querySelector('.popup__form');
+const formElementProfile = popupProfile.querySelector('.popup__form');
 const nameInput = formElementProfile.querySelector('.popup__input_name');
 const descriptionInput = formElementProfile.querySelector('.popup__input_description');
 const profileInfo = document.querySelector('.profile__info');
@@ -93,9 +93,7 @@ contentAddButton.addEventListener('click', function() {
     openPopup(popupContent);
     photoLinkInput.value = '';
     titleInput.value = '';
-    const buttonDisabled = popupContent.querySelector('.popup__submit-button')
-    buttonDisabled.classList.add('popup__submit-button_disabled')
-    buttonDisabled.setAttribute('disabled', true);
+    validationPopupContent.disableSubmitButton();
 });
 contentPopupCloseButton.addEventListener('click', () => closePopup(popupContent));
 
@@ -155,8 +153,13 @@ const validationConfig = {
     errorClass: 'popup__input-error_active'
 };
 
-// enableValidation(validationConfig)
-const validationPopup = new FormValidator(validationConfig)
-validationPopup.enableValidation()
+// const validationPopup = new FormValidator(validationConfig)
+// validationPopup.enableValidation()
+
+const validationPopupProfile = new FormValidator(validationConfig, formElementProfile)
+const validationPopupContent = new FormValidator(validationConfig, formElementContent)
+
+validationPopupProfile.enableValidation();
+validationPopupContent.enableValidation()
 
 export default openPopup
