@@ -92,45 +92,14 @@ const photoLinkInput = formElementContent.querySelector('.popup__input_photo-lin
 
 contentAddButton.addEventListener('click', function() {
     openPopup(popupContent);
-    photoLinkInput.value = '';
-    titleInput.value = '';
     validationPopupContent.setInitialState();
 });
 contentPopupCloseButton.addEventListener('click', () => closePopup(popupContent));
 
 const popupImage = document.querySelector('.popup_type_image');
 const imagePopupCloseButton = popupImage.querySelector('.popup__close-button');
-const imageViewCard = popupImage.querySelector('.popup__image');
-const descriptionViewCard = popupImage.querySelector('.popup__description');
 
 const container = document.querySelector('.elements__list');
-const template = document.querySelector('#element__template').content.querySelector('.element');
-
-// function createCard(cardName, cardLink) {
-//     const card = template.cloneNode(true);
-//     card.querySelector('.element__image').src = cardLink;
-//     card.querySelector('.element__image').alt = cardName;
-//     card.querySelector('.element__title').textContent = cardName;
-//     card.querySelector('.element__delete-button').addEventListener('click', () => {
-//         card.remove();
-//     });
-//     card.querySelector('.element__like-button').addEventListener('click', function (event) {
-//         event.target.classList.toggle('element__like-button_active');
-//     });
-//     card.querySelector('.element__image-button').addEventListener('click', function() {
-//         openPopup(popupImage);
-//         imageViewCard.src = cardLink;
-//         imageViewCard.alt = cardName;
-//         descriptionViewCard.textContent = cardName;
-//     });
-//     return card;
-// }
-
-// function renderCard(cardData) {
-//     const newCard = new Card(cardData, '#element__template')
-//     // console.log(newCard)
-//     container.prepend(newCard.getView());
-// }
 
 function createCard(cardData) {
     return new Card(cardData, '#element__template');
@@ -161,9 +130,6 @@ const validationConfig = {
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__input-error_active'
 };
-
-// const validationPopup = new FormValidator(validationConfig)
-// validationPopup.enableValidation()
 
 const validationPopupProfile = new FormValidator(validationConfig, formElementProfile)
 const validationPopupContent = new FormValidator(validationConfig, formElementContent)

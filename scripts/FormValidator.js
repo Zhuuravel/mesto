@@ -57,7 +57,8 @@ class FormValidator {
         this._inputs.forEach((inputElement) => {
             this._hideInputError(inputElement)
             })
-        this._toggleButtonState()
+        this._formElement.addEventListener('submit', this._formElement.reset());
+        this._toggleButtonState();
     }
 
     _disableSubmitButton() {
