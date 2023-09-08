@@ -1,5 +1,5 @@
 .profile__image {
-    min-height: 120px;
+    max-height: 120px;
     width: 120px;
     object-fit: cover;
     border-radius: 50%;

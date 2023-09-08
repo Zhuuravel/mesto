@@ -1,10 +1,9 @@
-import openPopup from "./index.js";
-
 class Card {
-    constructor({name, link}, templateSelector) {
+    constructor({name, link}, templateSelector, handleCardClick) {
         this._name = name;
         this._link = link;
         this._templateSelector = templateSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTemplate() {
@@ -32,13 +31,14 @@ class Card {
     }
 
     _handleImageCard() {
-        const popupImage = document.querySelector('.popup_type_image');
-        const imageViewCard = popupImage.querySelector('.popup__image');
-        const descriptionViewCard = popupImage.querySelector('.popup__description');
-        imageViewCard.src = this._link;
-        imageViewCard.alt = this._name;
-        descriptionViewCard.textContent = this._name;
-        openPopup(popupImage);
+        this._handleCardClick(this._link, this._name)
+        // const popupImage = document.querySelector('.popup_type_image');
+        // const imageViewCard = popupImage.querySelector('.popup__image');
+        // const descriptionViewCard = popupImage.querySelector('.popup__description');
+        // imageViewCard.src = this._link;
+        // imageViewCard.alt = this._name;
+        // descriptionViewCard.textContent = this._name;
+        // openPopup(popupImage);
     }
 
     _setListeners() {
