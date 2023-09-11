@@ -1,21 +1,19 @@
-import Section from "./Section";
-
-class UserInfo{
-    constructor(nameSelector, descriptionSelector) {
-        this._nameSelector = document.querySelector(nameSelector);
-        this._descriptionSelector = document.querySelector(descriptionSelector);
+class UserInfo {
+    constructor(name, description) {
+        this._name = document.querySelector(name);
+        this._description = document.querySelector(description);
     }
 
     getUserInfo() {
         return {
-            name: this._nameSelector.textContent,
-            description: this._descriptionSelector.textContent
+            name: this._name,
+            description: this._description
         }
     }
 
-    setUserInfo({ name, description }) {
-        this._nameSelector.textContent = name;
-        this._descriptionSelector.textContent = description;
+    setUserInfo(name, description) {
+        this._name.textContent = name;
+        this._description.textContent = description;
     }
 }
 

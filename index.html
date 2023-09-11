@@ -35,7 +35,7 @@
     <div class="popup__container">
       <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form" name="info" novalidate>
+      <form class="popup__form" name="info-profile" novalidate>
         <label for="input-name" class="popup__form-field">
           <input type="text" class="popup__input popup__input_name" id="input-name" name="name" placeholder="Имя" value="Жак-Ив Кусто" minlength="2" maxlength="40" required>
           <span class="popup__input-error input-name-error"></span>
@@ -52,13 +52,13 @@
     <div class="popup__container">
       <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
       <h2 class="popup__title">Новое место</h2>
-      <form class="popup__form" name="photo" novalidate>
+      <form class="popup__form" name="info-content" novalidate>
         <label for="input-title" class="popup__form-field">
           <input type="text" class="popup__input popup__input_title" id="input-title" name="title" placeholder="Название" minlength="2" maxlength="30" required>
           <span class="popup__input-error input-title-error"></span></label>
-        <label for="input-photo-link" class="popup__form-field">
-          <input type="url" class="popup__input popup__input_photo-link" id="input-photo-link" name="photo-link" placeholder="Ссылка на картинку" required>
-          <span class="popup__input-error input-photo-link-error">Kuku</span>
+        <label for="input-photo" class="popup__form-field">
+          <input type="url" class="popup__input popup__input_photo" id="input-photo" name="photo" placeholder="Ссылка на картинку" required>
+          <span class="popup__input-error input-photo-error">Kuku</span>
         </label>
         <button class="popup__submit-button" type="submit" aria-label="Создать">Создать</button>
       </form>

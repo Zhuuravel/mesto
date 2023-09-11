@@ -13,13 +13,13 @@ class Card {
             .cloneNode(true);
     }
 
-    _setData() {
-        const imageCard = this._newCardElement.querySelector('.element__image');
-        imageCard.src = this._link;
-        imageCard.alt = this._name;
-        const titleCard = this._newCardElement.querySelector('.element__title');
-        titleCard.textContent = this._name;
-    }
+    // _setData() {
+    //     const imageCard = this._newCardElement.querySelector('.element__image');
+    //     imageCard.src = this._link;
+    //     imageCard.alt = this._name;
+    //     const titleCard = this._newCardElement.querySelector('.element__title');
+    //     titleCard.textContent = this._name;
+    // }
 
     _handleDeleteCard() {
         this._newCardElement.remove();
@@ -31,14 +31,9 @@ class Card {
     }
 
     _handleImageCard() {
-        this._handleCardClick(this._link, this._name)
-        // const popupImage = document.querySelector('.popup_type_image');
-        // const imageViewCard = popupImage.querySelector('.popup__image');
-        // const descriptionViewCard = popupImage.querySelector('.popup__description');
-        // imageViewCard.src = this._link;
-        // imageViewCard.alt = this._name;
-        // descriptionViewCard.textContent = this._name;
-        // openPopup(popupImage);
+        this._newCardElement.querySelector('.element__image-button').addEventListener('click', () => {
+            this._handleCardClick(this._link, this._name);
+        })
     }
 
     _setListeners() {
@@ -48,13 +43,16 @@ class Card {
         const likeButton = this._newCardElement.querySelector('.element__like-button');
         likeButton.addEventListener('click', () => { this._handleLikeCard() });
 
-        const imageButton = this._newCardElement.querySelector('.element__image-button');
+        const imageButton = this._newCardElement.querySelector('.element__image');
         imageButton.addEventListener('click', () => { this._handleImageCard() });
     }
 
     getView() {
         this._newCardElement = this._getTemplate();
-        this._setData();
+        this._newCardElement.querySelector('.element__image').src = this._link;
+        this._newCardElement.querySelector('.element__image').alt = this._name;
+        this._newCardElement.querySelector('.element__title').textContent = this._name;
+        // this._setData();
         this._setListeners();
 
         return this._newCardElement
