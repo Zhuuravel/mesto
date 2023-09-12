@@ -13,14 +13,6 @@ class Card {
             .cloneNode(true);
     }
 
-    // _setData() {
-    //     const imageCard = this._newCardElement.querySelector('.element__image');
-    //     imageCard.src = this._link;
-    //     imageCard.alt = this._name;
-    //     const titleCard = this._newCardElement.querySelector('.element__title');
-    //     titleCard.textContent = this._name;
-    // }
-
     _handleDeleteCard() {
         this._newCardElement.remove();
         this._newCardElement = null;
@@ -32,7 +24,7 @@ class Card {
 
     _handleImageCard() {
         this._newCardElement.querySelector('.element__image-button').addEventListener('click', () => {
-            this._handleCardClick(this._link, this._name);
+            this._handleCardClick(this._name, this._link);
         })
     }
 
@@ -52,7 +44,6 @@ class Card {
         this._newCardElement.querySelector('.element__image').src = this._link;
         this._newCardElement.querySelector('.element__image').alt = this._name;
         this._newCardElement.querySelector('.element__title').textContent = this._name;
-        // this._setData();
         this._setListeners();
 
         return this._newCardElement
