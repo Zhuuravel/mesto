@@ -19,12 +19,11 @@ const addItems = (item) => {
 }
 
 const cardList = new Section({
-    items: initialCards,
     renderer: (item) => {
         addItems(item)
     }
 }, '.elements__list')
-cardList.renderItems()
+cardList.renderItems(initialCards)
 
 const popupEditProfile = new PopupWithForm(popupProfile, {
     submitForm: (info, evt) => {
@@ -40,10 +39,11 @@ const validationPopupProfile = new FormValidator(validationConfig, formElementPr
 validationPopupProfile.enableValidation();
 
 profileEditButton.addEventListener('click', () => {
+    const info = profileRenderer.getUserInfo()
     popupEditProfile.open();
     validationPopupProfile.setInitialState();
-    nameInput.value = profileRenderer.getUserInfo().name.textContent;
-    descriptionInput.value = profileRenderer.getUserInfo().description.textContent;
+    nameInput.value = info.name;
+    descriptionInput.value = info.description;
 });
 
 
@@ -74,5 +74,6 @@ const popupOpenImage = new PopupWithImage(popupImage)
 
 function openPhoto(name, link) {
     popupOpenImage.open(name, link);
-    popupOpenImage.setEventListeners();
 }
+
+popupOpenImage.setEventListeners();
