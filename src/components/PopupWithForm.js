@@ -4,8 +4,10 @@ class PopupWithForm extends Popup {
     constructor(popupSelector, {submitForm}) {
         super(popupSelector);
         this._form = popupSelector.querySelector('.popup__form');
+        this._submitButton = this._form.querySelector('.popup__submit-button');
         this._submitForm = submitForm;
         this._inputs = Array.from(this._popup.querySelectorAll('.popup__input'));
+        this._buttonDeleteText = this._submitButton.textContent
     }
 
     _getInputValues() {
@@ -24,6 +26,14 @@ class PopupWithForm extends Popup {
     close() {
         super.close()
         this._form.reset()
+    }
+
+    renderLoading(isLoading) {
+        if(isLoading) {
+            this._submitButton.textContent = 'Сохранение...'
+        } else {
+            this._submitButton.textContent = this._buttonDeleteText
+        }
     }
 }
 

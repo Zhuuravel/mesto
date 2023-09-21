@@ -1,14 +1,12 @@
 .profile__image {
-    max-height: 120px;
+    min-height: 120px;
     width: 120px;
     object-fit: cover;
     border-radius: 50%;
     margin-right: 30px;
+    transition: opacity 0.3s ease;
 }
 
-@media (max-width: 1023px) {
-    .profile__image {
-        margin-right: 0;
-        margin-bottom: 26px;
-    }
+.profile__image:hover {
+    opacity: 0.2;
 }
