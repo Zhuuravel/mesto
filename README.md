@@ -8,4 +8,4 @@
 * CSS;
 * JavaScript.
 
-# Ссылка на проект[Ссылка на проект](https://zhuuravel.github.io/mesto/)
+[Ссылка на проект](https://zhuuravel.github.io/mesto/)
