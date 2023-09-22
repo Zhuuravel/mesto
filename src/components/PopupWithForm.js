@@ -35,6 +35,13 @@ class PopupWithForm extends Popup {
             this._submitButton.textContent = this._buttonDeleteText
         }
     }
+
+    setInputValues(data) {
+        this._inputs.forEach((input) => {
+            // тут вставляем в `value` инпута данные из объекта по атрибуту `name` этого инпута
+            input.value = data[input.name];
+        });
+    }
 }
 
 export default PopupWithForm

@@ -4,17 +4,19 @@ class Api {
         this._headers = headers;
     }
 
+    _checkResponse(res) {
+            if (res.ok) {
+                return res.json();
+            }
+            throw new Error('Что-то пошло не так...')
+    }
+
     getAllCards() {
         return fetch(`${this._url}/cards`, {
             method: 'GET',
             headers: this._headers
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                }
-                throw new Error('Что-то пошло не так...')
-            })
+            .then(this._checkResponse)
             .catch((err) => {
                 console.log(err);
             })
@@ -26,12 +28,7 @@ class Api {
             headers: this._headers,
             body: JSON.stringify(data)
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                }
-                throw new Error('Что-то пошло не так...')
-            })
+            .then(this._checkResponse)
             .catch((err) => {
                 console.log(err);
             })
@@ -42,12 +39,7 @@ class Api {
             method: 'DELETE',
             headers: this._headers
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                }
-                throw new Error('Что-то пошло не так...')
-            })
+            .then(this._checkResponse)
             .catch((err) => {
                 console.log(err);
             })
@@ -58,12 +50,7 @@ class Api {
             method: 'GET',
             headers: this._headers
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                }
-                throw new Error('Что-то пошло не так...')
-            })
+            .then(this._checkResponse)
             .catch((err) => {
                 console.log(err);
             })
@@ -77,7 +64,11 @@ class Api {
                 name: name.value,
                 about: description.value
             })
-        });
+        })
+            .then(this._checkResponse)
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
     setProfileAvatar(link) {
@@ -87,21 +78,33 @@ class Api {
             body: JSON.stringify({
                 avatar: link.value
             })
-        });
+        })
+            .then(this._checkResponse)
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
     addLikeClick(_id) {
         return fetch(`${this._url}/cards/${_id}/likes`, {
             method: 'PUT',
             headers: this._headers,
-        });
+        })
+            .then(this._checkResponse)
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
     deleteLikeClick(_id) {
         return fetch(`${this._url}/cards/${_id}/likes`, {
             method: 'DELETE',
             headers: this._headers,
-        });
+        })
+            .then(this._checkResponse)
+            .catch((err) => {
+                console.log(err);
+            })
     }
 }
 

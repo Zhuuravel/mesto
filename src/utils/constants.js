@@ -1,29 +1,10 @@
-// export const initialCards = [
-//     {
-//         name: 'Токио',
-//         link: 'https://images.unsplash.com/photo-1621139151681-5ac8d73128ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80.jpg'
-//     },
-//     {
-//         name: 'Венеция',
-//         link: 'https://images.unsplash.com/photo-1519112232436-9923c6ba3d26?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80.jpg'
-//     },
-//     {
-//         name: 'Париж',
-//         link: 'https://images.unsplash.com/photo-1478391679764-b2d8b3cd1e94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80.jpg'
-//     },
-//     {
-//         name: 'Сидней',
-//         link: 'https://images.unsplash.com/photo-1524562865630-b991c6c2f261?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80.jpg'
-//     },
-//     {
-//         name: 'Нью-Йорк',
-//         link: 'https://images.unsplash.com/photo-1582760548598-0bccdf815aa2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80.jpg'
-//     },
-//     {
-//         name: 'Москва',
-//         link: 'https://images.unsplash.com/photo-1537891115166-4affb371bbd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80.jpg'
-//     }
-// ];
+export const optionsApi = {
+    url: 'https://mesto.nomoreparties.co/v1/cohort-75',
+    headers: {
+        authorization: 'de840de0-da05-4c0b-8b96-55f691e0c5a8',
+        'Content-Type': "application/json"
+    }
+}
 
 export const profileEditButton = document.querySelector('.profile__edit-button');
 export const avatarEditButton = document.querySelector('.profile__avatar-button');

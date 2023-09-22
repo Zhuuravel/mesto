@@ -9,31 +9,33 @@ import Api from "../components/Api.js";
 import "./index.css"
 
 import {
-    popupAvatar, popupProfile, profileEditButton, avatarEditButton, formElementProfile, formElementAvatar, avatarInput, nameInput,
+    optionsApi, popupAvatar, popupProfile, profileEditButton, avatarEditButton, formElementProfile, formElementAvatar, avatarInput, nameInput,
     descriptionInput, profileAvatar, profileName, profileDescription, contentAddButton, popupContent,
     formElementContent, popupImage, validationConfig, popupConfirm
 } from "../utils/constants.js";
 
-const optionsApi = {
-    url: 'https://mesto.nomoreparties.co/v1/cohort-75',
-    headers: {
-        authorization: 'de840de0-da05-4c0b-8b96-55f691e0c5a8',
-        'Content-Type': "application/json"
-    }
-    }
-
 const api = new Api(optionsApi);
-
-//id пользователя
 
 let userId
 
-api.getProfileInfo()
-    .then((items) => {
-        userId = items._id
+Promise.all([api.getProfileInfo(), api.getAllCards()])
+    .then(([userData, cards]) => {
+        // тут установка данных пользователя
+        userId = userData._id;
+
+        // popupEditProfile.setInputValues(userData)
+        // popupEditAvatar.setInputValues(userData)
+
+        profileRenderer.setUserInfo(userData.name, userData.about);
+        profileRenderer.setUserAvatar(userData.avatar);
+        // и тут отрисовка карточек
+        cards.reverse().forEach((card) => {
+            addItems(card);
+        })
     })
-
-
+    .catch((err) => {
+        console.log(err);
+    })
 
 const profileRenderer = new UserInfo(profileName, profileDescription, profileAvatar);
 
@@ -43,8 +45,9 @@ popupDeleteConfirm.setEventListeners();
 const addItems = (item) => {
     const card = new Card(item, '#element__template', (cardId) => {
             api.addLikeClick(cardId)
-                .then(() => {
-                    card.addLike();
+                .then((res) => {
+                    card.addLike(res);
+
                 })
                 .catch((error) => {
                     console.log(error)
@@ -53,8 +56,8 @@ const addItems = (item) => {
             },
         (cardId) => {
             api.deleteLikeClick(cardId)
-                .then(() => {
-                    card.removeLike();
+                .then((res) => {
+                    card.removeLike(res);
                 })
                 .catch((error) => {
                     console.log(error)
@@ -72,59 +75,28 @@ const addItems = (item) => {
                     .finally( () => popupDeleteConfirm.renderLoading(false))
             })
             popupDeleteConfirm.open()
-        }, userId, api
+        }, userId
     )
     const cardElement = card.getView()
     cardList.addItem(cardElement)
 }
-
-// function handleCardLike(item, card, userId) {
-//     const isLiked = item.likes.some((like) => like._id === userId);
-//     const cardId = item._id;
-//
-//     if (isLiked) {
-//         api.deleteLikeClick(cardId)
-//             .then((items) => {
-//                 card.updateLikes();
-//             })
-//             .catch((error) => {
-//                 console.error(`Ошибка при удалении лайка: ${error}`);
-//             });
-//     } else {
-//         api.addLikeClick(cardId)
-//             .then((items) => {
-//                 card.updateLikes();
-//             })
-//             .catch((error) => {
-//                 console.error(`Ошибка при добавлении лайка: ${error}`);
-//             });
-//     }
-// }
 
 const cardList = new Section({
     renderer: (item) => {
         addItems(item)
     }
 }, '.elements__list')
-// cardList.renderItems(initialCards)
-
-api.getAllCards()
-    .then((items) => {
-        items.forEach((item) => {
-            addItems(item);
-        })
-    })
 
 const popupEditAvatar = new PopupWithForm(popupAvatar, {
     submitForm: (info, evt) => {
         evt.preventDefault();
         api.setProfileAvatar(avatarInput)
             .then(() => {
+                profileRenderer.setUserAvatar(avatarInput.value);
+                popupEditAvatar.close();
             })
             .finally( () => popupEditAvatar.renderLoading(false))
         popupEditAvatar.renderLoading(true)
-        profileRenderer.setUserAvatar(avatarInput.value);
-        popupEditAvatar.close();
     }
 });
 
@@ -135,11 +107,8 @@ validationPopupAvatar.enableValidation();
 
 avatarEditButton.addEventListener('click', () => {
     popupEditAvatar.open();
-    api.getProfileInfo()
-        .then((items) => {
-            avatarInput.value = items.avatar;
-            validationPopupAvatar.setInitialState();
-        })
+    popupEditAvatar.setInputValues(profileRenderer.getUserInfo())
+    validationPopupAvatar.setInitialState();
 });
 
 
@@ -149,11 +118,11 @@ const popupEditProfile = new PopupWithForm(popupProfile, {
         evt.preventDefault();
         api.setProfileInfo(nameInput, descriptionInput)
             .then(() => {
+                profileRenderer.setUserInfo(nameInput.value, descriptionInput.value);
+                popupEditProfile.close();
             })
             .finally( () => popupEditProfile.renderLoading(false))
         popupEditProfile.renderLoading(true)
-        profileRenderer.setUserInfo(nameInput.value, descriptionInput.value);
-        popupEditProfile.close();
     }
 });
 
@@ -165,12 +134,8 @@ validationPopupProfile.enableValidation();
 profileEditButton.addEventListener('click', () => {
     popupEditProfile.open();
     validationPopupProfile.setInitialState();
-    api.getProfileInfo()
-        .then((items) => {
-            nameInput.value = items.name;
-            descriptionInput.value = items.about;
-        })
-});
+    popupEditProfile.setInputValues(profileRenderer.getUserInfo());
+})
 
 
 const popupAddContent = new PopupWithForm(popupContent, {
@@ -183,10 +148,10 @@ const popupAddContent = new PopupWithForm(popupContent, {
         api.createCards(addCard)
             .then((newCard) => {
                 addItems(newCard);
+                popupAddContent.close();
             })
             .finally( () => popupAddContent.renderLoading(false))
         popupAddContent.renderLoading(true)
-        popupAddContent.close();
     }
 });
 
