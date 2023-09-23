@@ -17,9 +17,6 @@ class Api {
             headers: this._headers
         })
             .then(this._checkResponse)
-            .catch((err) => {
-                console.log(err);
-            })
     }
 
     createCards(data) {
@@ -29,9 +26,6 @@ class Api {
             body: JSON.stringify(data)
         })
             .then(this._checkResponse)
-            .catch((err) => {
-                console.log(err);
-            })
     }
 
     deleteCards(_id) {
@@ -40,9 +34,6 @@ class Api {
             headers: this._headers
         })
             .then(this._checkResponse)
-            .catch((err) => {
-                console.log(err);
-            })
     }
 
     getProfileInfo() {
@@ -51,38 +42,29 @@ class Api {
             headers: this._headers
         })
             .then(this._checkResponse)
-            .catch((err) => {
-                console.log(err);
-            })
     }
 
-    setProfileInfo(name, description) {
+    setProfileInfo(data) {
         return fetch(`${this._url}/users/me`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                name: name.value,
-                about: description.value
+                name: data.name,
+                about: data.description
             })
         })
             .then(this._checkResponse)
-            .catch((err) => {
-                console.log(err);
-            })
     }
 
-    setProfileAvatar(link) {
+    setProfileAvatar(data) {
         return fetch(`${this._url}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                avatar: link.value
+                avatar: data.avatar
             })
         })
             .then(this._checkResponse)
-            .catch((err) => {
-                console.log(err);
-            })
     }
 
     addLikeClick(_id) {
@@ -91,9 +73,6 @@ class Api {
             headers: this._headers,
         })
             .then(this._checkResponse)
-            .catch((err) => {
-                console.log(err);
-            })
     }
 
     deleteLikeClick(_id) {
@@ -102,9 +81,6 @@ class Api {
             headers: this._headers,
         })
             .then(this._checkResponse)
-            .catch((err) => {
-                console.log(err);
-            })
     }
 }
 

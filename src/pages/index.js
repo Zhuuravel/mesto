@@ -91,10 +91,13 @@ const cardList = new Section({
 const popupEditAvatar = new PopupWithForm(popupAvatar, {
     submitForm: (info, evt) => {
         evt.preventDefault();
-        api.setProfileAvatar(avatarInput)
-            .then(() => {
-                profileRenderer.setUserAvatar(avatarInput.value);
+        api.setProfileAvatar(info)
+            .then((data) => {
+                profileRenderer.setUserAvatar(data.avatar);
                 popupEditAvatar.close();
+            })
+            .catch((err) => {
+                console.log(err);
             })
             .finally( () => popupEditAvatar.renderLoading(false))
         popupEditAvatar.renderLoading(true)
@@ -117,10 +120,13 @@ avatarEditButton.addEventListener('click', () => {
 const popupEditProfile = new PopupWithForm(popupProfile, {
     submitForm: (info, evt) => {
         evt.preventDefault();
-        api.setProfileInfo(nameInput, descriptionInput)
-            .then(() => {
-                profileRenderer.setUserInfo(nameInput.value, descriptionInput.value);
+        api.setProfileInfo(info)
+            .then((data) => {
+                profileRenderer.setUserInfo(data.name, data.about);
                 popupEditProfile.close();
+            })
+            .catch((err) => {
+                console.log(err);
             })
             .finally( () => popupEditProfile.renderLoading(false))
         popupEditProfile.renderLoading(true)
@@ -150,6 +156,9 @@ const popupAddContent = new PopupWithForm(popupContent, {
             .then((newCard) => {
                 addItems(newCard);
                 popupAddContent.close();
+            })
+            .catch((err) => {
+                console.log(err);
             })
             .finally( () => popupAddContent.renderLoading(false))
         popupAddContent.renderLoading(true)
