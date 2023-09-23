@@ -1,10 +1,10 @@
 class Card {
-    constructor({name, link, _id, owner, likes}, templateSelector, handleLikeClick, handleLikeDelete, handleCardClick, handleConfirmDelete, userId) {
-        this._name = name;
-        this._link = link;
-        this._id = _id;
-        this._owner = owner;
-        this._likes = likes;
+    constructor(item, templateSelector, handleLikeClick, handleLikeDelete, handleCardClick, handleConfirmDelete, userId) {
+        this._name = item.name;
+        this._link = item.link;
+        this._id = item._id;
+        this._owner = item.owner;
+        this._likes = item.likes;
         this._userId = userId;
 
         this._handleLikeClick = handleLikeClick;
@@ -123,13 +123,15 @@ class Card {
         })
     };
 
-    addLike(data) {
+    addLike(item) {
         this._cardLikeButton.classList.add('element__like-button_active');
+        this._likes = item.likes;
         this._setLikes();
     }
 
-    removeLike() {
+    removeLike(item) {
         this._cardLikeButton.classList.remove('element__like-button_active');
+        this._likes = item.likes;
         this._setLikes();
     }
 

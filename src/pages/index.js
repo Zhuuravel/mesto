@@ -43,7 +43,8 @@ const popupDeleteConfirm = new PopupWithConfirm(popupConfirm);
 popupDeleteConfirm.setEventListeners();
 
 const addItems = (item) => {
-    const card = new Card(item, '#element__template', (cardId) => {
+    const card = new Card(item, '#element__template',
+        (cardId) => {
             api.addLikeClick(cardId)
                 .then((res) => {
                     card.addLike(res);
